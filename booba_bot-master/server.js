@@ -98,6 +98,8 @@ app.get('/resume', function(req, res){
           },
         "messages":msg
       });
+      res.end();
+      console.log('updated');
     })
 
   });
