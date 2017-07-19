@@ -196,7 +196,46 @@ request.post({
 });
 
 
+app.get('/larbi/:time', function(req, res){
+var date = new Date();
+var time = date.getTime();
+var time1 = int(req.params.blaz.replace(/\+/gi, " "));
+var diff = time1-time;
+res.setHeader('Content-Type', 'text/plain');
+res.status(200);
+
+  res.json({
+   "messages": [
+      {
+        "attachment":{
+          "type":"template",
+          "payload":{
+            "template_type":"generic",
+            "elements":[
+              {
+                "title":"voyons ce score...",
+                "image_url":"",
+                "buttons":[
+                  {
+                    "set_attributes":
+                    {
+                      "diff": diff
+                    },
+                    "type": "show_block",
+                    "block_name": "result",
+                    "title": "resultat"
+                  }]
+              }]
+          }}
+      }]
+  });
+  res.end();
+  console.log('updated');
+});
+
 app.get('/larbi', function(req, res){
+var date = new Date();
+var time = date.getTime();
 
 res.setHeader('Content-Type', 'text/plain');
 res.status(200);
@@ -214,6 +253,10 @@ res.status(200);
                 "image_url":"http://www.lepoint.fr/images/2012/05/02/debat-566573-jpg_388849_660x281.JPG",
                 "buttons":[
                   {
+                    "set_attributes":
+                    {
+                      "time1": time
+                    },
                     "type": "show_block",
                     "block_name": "stop_block",
                     "title": "J'ai fini !"
