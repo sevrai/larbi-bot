@@ -69,7 +69,7 @@ app.get('/resume', function(req, res){
   res.setHeader('Content-Type', 'text/plain');
   res.status(200);
   db.all("SELECT * FROM users", function(err, users) {
-    console.log(err);
+    console.log(err, users, this);
     total = {};
     for (var i=0; i<users.length; i++) {
       total[users[i].ID] = {'nb':0, 'name':users[i].name};
