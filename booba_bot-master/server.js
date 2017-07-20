@@ -35,7 +35,6 @@ app.get('/update', function(req, res){
 });
 
 db.serialize(function() {
-
   db.run("CREATE TABLE if not exists users (ID INTEGER, name TEXT)");
   db.run("CREATE TABLE if not exists times (ID INTEGER PRIMARY KEY AUTOINCREMENT, user_id INTEGER, start INTEGER, end INTEGER)", function(err){
     console.log(err, this);
