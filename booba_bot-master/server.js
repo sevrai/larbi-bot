@@ -42,9 +42,12 @@ db.serialize(function() {
 
 });
 
+db.close();
+
+
 
 app.get('/new/:id/:name', function(req, res){
-
+  db = new sqlite3.Database('scores.db');
   res.setHeader('Content-Type', 'text/plain');
   res.status(200);
   db.all("SELECT * FROM users WHERE ID=?",req.params.id, function(err, rows){
@@ -61,11 +64,11 @@ app.get('/new/:id/:name', function(req, res){
       });
     }
   });
-
+  db.close();
 })
 
 app.get('/resume', function(req, res){
-
+  db = new sqlite3.Database('scores.db');
   res.setHeader('Content-Type', 'text/plain');
   res.status(200);
   db.all("SELECT * FROM users", function(err, users) {
@@ -104,10 +107,11 @@ app.get('/resume', function(req, res){
     })
 
   });
-
+  db.close();
 })
 
 app.get('/stop/:id', function(req, res){
+  db = new sqlite3.Database('scores.db');
   var date = new Date();
   var time2 = date.getTime();
   var id = parseInt(req.params.id.replace(/\+/gi, " "));
@@ -148,9 +152,11 @@ app.get('/stop/:id', function(req, res){
     })
 
   });
+  db.close();
 });
 
 app.get('/start/:id', function(req, res){
+  db = new sqlite3.Database('scores.db');
 var date = new Date();
 var time = parseInt(date.getTime());
 var id = parseInt(req.params.id.replace(/\+/gi, " "));
@@ -187,6 +193,7 @@ db.run("INSERT into \"times\" (user_id, start) VALUES ($id, $time)", {'$id':id, 
     res.end();
     console.log('updated');
 });
+db.close();
 
 });
 
