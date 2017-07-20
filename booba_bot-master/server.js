@@ -90,7 +90,7 @@ app.get('/resume', function(req, res){
       msg = []
       for (i in total) {
         console.log(i);
-        msg.push({'txt':total[i]['name']+' cumule '+total[i]['nb']+' secondes perdues'});
+        msg.push({'text':total[i]['name']+' cumule '+total[i]['nb']+' secondes perdues'});
       }
       res.json({
         "set_attributes":
